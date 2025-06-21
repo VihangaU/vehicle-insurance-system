@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const vehicleSchema = new mongoose.Schema({
-    owner: {
+    ownerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
@@ -21,12 +21,8 @@ const vehicleSchema = new mongoose.Schema({
     registrationNumber: {
         type: String,
         required: true,
+        unique: true,
     },
-    insurancePackage: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'InsurancePackage',
-    }
-});
+}, { timestamps: true });
 
-const vehicle = mongoose.model('Vehicle', vehicleSchema);
-module.exports = vehicle;
+module.exports = mongoose.model('Vehicle', vehicleSchema);

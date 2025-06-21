@@ -12,13 +12,17 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const insuranceRoutes = require('./routes/insuranceRoutes');
 const vehicleRoutes = require('./routes/vehicleRoutes');
 const userRoutes = require('./routes/userRoutes');
+const policyRoutes = require('./routes/policyRoutes');
+const claimRoutes = require('./routes/claimRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 
-app.use('/api', insuranceRoutes);
-app.use('/api', vehicleRoutes);
-app.use('/api', userRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/policies', policyRoutes);
+app.use('/api/claims', claimRoutes);
+app.use('/api/payments', paymentRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
