@@ -11,11 +11,6 @@ const policySchema = new mongoose.Schema({
         ref: 'Vehicle',
         required: true,
     },
-    policyNumber: {
-        type: String,
-        required: true,
-        unique: true,
-    },
     name: {
         type: String,
         required: true,
