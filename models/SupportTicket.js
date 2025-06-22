@@ -19,8 +19,8 @@ const supportTicketSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['open', 'answered', 'closed'],
-        default: 'open',
+        enum: ['initial', 'replied'],
+        default: 'initial',
     },
 }, { timestamps: true });
 
