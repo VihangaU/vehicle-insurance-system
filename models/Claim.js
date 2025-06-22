@@ -11,6 +11,11 @@ const claimSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    vehicleId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Vehicle',
+        required: true,
+    },
     claimDate: {
         type: Date,
         required: true,
@@ -21,11 +26,12 @@ const claimSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'approved', 'rejected', 'paid'],
+        enum: ['pending', 'completed'],
         default: 'pending',
     },
     description: {
         type: String,
+        required: true,
     },
 }, { timestamps: true });
 

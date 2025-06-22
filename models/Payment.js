@@ -11,6 +11,11 @@ const paymentSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    claimId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Claim',
+        required: true,
+    },
     amount: {
         type: Number,
         required: true,
@@ -21,13 +26,13 @@ const paymentSchema = new mongoose.Schema({
     },
     method: {
         type: String,
-        enum: ['credit card', 'bank transfer', 'cash', 'other'],
+        enum: ['credit card', 'bank transfer', 'cash'],
         required: true,
     },
     status: {
         type: String,
-        enum: ['completed', 'failed', 'pending'],
-        default: 'pending',
+        enum: ['paid', 'pending'],
+        default: 'paid',
     },
 }, { timestamps: true });
 
