@@ -17,12 +17,14 @@ const userRoutes = require('./routes/userRoutes');
 const policyRoutes = require('./routes/policyRoutes');
 const claimRoutes = require('./routes/claimRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const supportRoutes = require('./routes/supportRoutes');
 
 app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/policies', policyRoutes);
 app.use('/api/claims', claimRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/support', supportRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
