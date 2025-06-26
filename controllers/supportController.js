@@ -5,7 +5,6 @@ const User = require('../models/User');
 exports.askQuestion = async (req, res) => {
     try {
         const { userId, question } = req.body;
-        // Check user role
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -21,16 +20,13 @@ exports.askQuestion = async (req, res) => {
     }
 };
 
-// Agent replies to a question
 exports.replyToQuestion = async (req, res) => {
     try {
         const { agentId, reply } = req.body;
-        // Validate ticket existence first
         const ticketExists = await SupportTicket.findById(req.params.ticketId);
         if (!ticketExists) {
             return res.status(404).json({ message: 'Ticket not found' });
         }
-        // Check agent role
         const agent = await User.findById(agentId);
         if (!agent) {
             return res.status(404).json({ message: 'Agent not found' });
@@ -49,7 +45,6 @@ exports.replyToQuestion = async (req, res) => {
     }
 };
 
-// User views their tickets
 exports.getUserTickets = async (req, res) => {
     try {
         const mongoose = require('mongoose');
@@ -69,7 +64,6 @@ exports.getUserTickets = async (req, res) => {
     }
 };
 
-// Agent views tickets (all open or assigned to them)
 exports.getAgentTickets = async (req, res) => {
     try {
         const tickets = await SupportTicket.find();
@@ -82,7 +76,6 @@ exports.getAgentTickets = async (req, res) => {
     }
 };
 
-// Agent views only tickets that haven't been replied to yet
 exports.getUnrepliedTickets = async (req, res) => {
     try {
         const tickets = await SupportTicket.find({ status: 'initial' });

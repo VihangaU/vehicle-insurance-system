@@ -15,7 +15,6 @@ exports.getAllUsers = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
     try {
-        // Check if ID is valid ObjectId format
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -40,10 +39,8 @@ exports.createUser = async (req, res) => {
     }
 };
 
-// Update user
 exports.updateUser = async (req, res) => {
     try {
-        // Check if ID is valid ObjectId format
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -56,10 +53,8 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-// Delete user
 exports.deleteUser = async (req, res) => {
     try {
-        // Check if ID is valid ObjectId format
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return res.status(404).json({ message: 'User not found' });
         }

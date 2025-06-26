@@ -29,7 +29,7 @@ exports.createPayment = async (req, res) => {
     try {
         const { policyId, userId, claimId, amount, paymentDate, method, status } = req.body;
         const mongoose = require('mongoose');
-        // Validate ObjectIds
+
         if (!policyId || !userId || !claimId) {
             return res.status(400).json({ message: 'policyId, userId, and claimId are required' });
         }
@@ -42,7 +42,7 @@ exports.createPayment = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(claimId)) {
             return res.status(400).json({ message: 'Invalid claim ID format' });
         }
-        // Validate existence
+        
         const policy = await Policy.findById(policyId);
         if (!policy) {
             return res.status(404).json({ message: 'Policy not found' });
@@ -55,11 +55,10 @@ exports.createPayment = async (req, res) => {
         if (!claim) {
             return res.status(404).json({ message: 'Claim not found' });
         }
-        // Create payment
+        
         const payment = new Payment({ policyId, userId, claimId, amount, paymentDate, method, status });
         await payment.save();
 
-        // If payment is paid, update the claim status to completed
         if (payment.status === 'paid') {
             await Claim.findByIdAndUpdate(payment.claimId, { status: 'completed' });
         }

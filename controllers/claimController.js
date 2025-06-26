@@ -27,7 +27,6 @@ exports.createClaim = async (req, res) => {
     try {
         const { policyId, userId, vehicleId, claimDate, amountClaimed, status, description } = req.body;
 
-        // Validate ObjectIds
         if (!policyId || !userId || !vehicleId) {
             return res.status(400).json({ message: 'policyId, userId, and vehicleId are required' });
         }
@@ -41,7 +40,6 @@ exports.createClaim = async (req, res) => {
             return res.status(400).json({ message: 'Invalid vehicle ID format' });
         }
 
-        // Validate existence
         const Policy = require('../models/Policy');
         const User = require('../models/User');
         const Vehicle = require('../models/Vehicle');
